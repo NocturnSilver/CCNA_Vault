@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"ee121438bd223f13","type":"text","text":"Data serialization languages/formats","x":-120,"y":40,"width":250,"height":50,"color":"5"},
+		{"id":"e86965f193c21d81","type":"text","text":"JSON (Javascript Object Notation)","x":-820,"y":320,"width":440,"height":60,"color":"4"},
+		{"id":"92f2cf4258ea003c","x":-820,"y":380,"width":440,"height":820,"type":"text","text":"- is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects\n- Standardizes in RFC 8259 (https://datatracker.ietf.org/doc/html/rfc8259)\n- It was derives from JavaScript, but it is language-independent and many modern programming languages are able to generate and read JSON data\n\t- RESTP APIs often use JSOn\n- Whitespace is insignificant\n- JSON can represetn four 'primitive' data types\n\t- string - text value. surrounded by \"\"\n\t- number - numeric value\n\t- boolean - only two possible val: T/F\n\t- null - absence of object values - null\n- JSON also has two 'structured' data types:\n\t- object  (aka dictionary)\n\t\t- unordered list of key-value pairs (variables)\n\t\t- objects are surrounded by {}\n\t\t- key is a string\n\t\t- value - any valid JSON data type\n\t\t- key and val separated by colon\n\t\t- multiple key-val pairs separated by ,\n\t- array [ ]\n\t\t- series of values separated by ,\n\t\t- not key-val pairs\n\t\t- values dont have to be of same type"},
+		{"id":"cfccbd8f114082c4","type":"text","text":"YAML (YAML Ain't Markup Language)","x":360,"y":320,"width":440,"height":60,"color":"4"},
+		{"id":"91755dbb7e86b1bd","type":"text","text":"- was developed as a markup language, but is now used as a a general data serialization language.\n\t- markup language (ie. HTML) are used to format text (font, size, color, headings, etc.)\n- XML is generally less human-readable than JSON\n- Whitespace is insignificant\n- often used by REST APIs\n- \\<key>value\\</key>\n\n","x":-215,"y":380,"width":440,"height":820},
+		{"id":"0d73f6c4d4db26b7","type":"text","text":"XML (extensible Markup Language)","x":-215,"y":320,"width":440,"height":60,"color":"4"},
+		{"id":"db69110d466d869b","type":"text","text":"- originally meant Yet Another Markup Language, but to distinguish its purpose as data-serialization language rather than a markup language, it was repurposed to YAML Aint Markup Language.\n- YAML is used by the network automation tool Ansible (we'll cover that later!).\n- YAML is very human-readable\n- Whitespace is significant (unlike JSON and XML).\n\t- indentation is very important\n- YAML files start with ---\n- - is used to indicate a list\n- keys and values are represented as key:value","x":360,"y":380,"width":440,"height":820},
+		{"id":"7ed772c37f779b09","type":"text","text":"Data Serialization","x":-310,"y":-480,"width":630,"height":60,"color":"6"},
+		{"id":"522e23a2f0f54a6e","type":"text","text":"- Data serialization is the process of converting data into a standardized format/structure that can be stores (in a file) or transmitted (over a network) and reconstructed later (ie. by a different applicatoin).\n\t- This allows the data to be communicated between applications in a way both applications understand\n- Data serialization languages allow us to represent variables with text\n- variables are containers that store values. ","x":-310,"y":-420,"width":630,"height":340}
+	],
+	"edges":[
+		{"id":"f3815d0b8412d7d6","fromNode":"ee121438bd223f13","fromSide":"bottom","toNode":"e86965f193c21d81","toSide":"top"},
+		{"id":"014b7211c4ae2019","fromNode":"ee121438bd223f13","fromSide":"bottom","toNode":"cfccbd8f114082c4","toSide":"top"},
+		{"id":"da9f34b82dfa5e8c","fromNode":"ee121438bd223f13","fromSide":"bottom","toNode":"0d73f6c4d4db26b7","toSide":"top"},
+		{"id":"74e2452ca6259741","fromNode":"522e23a2f0f54a6e","fromSide":"bottom","toNode":"ee121438bd223f13","toSide":"top"}
+	]
+}
