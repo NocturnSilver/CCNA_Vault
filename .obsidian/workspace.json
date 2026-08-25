@@ -25,17 +25,14 @@
             "id": "f2b02da37c308b80",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Network Automation/API Authentication.canvas",
-                "viewState": {
-                  "x": 1271.8974741239763,
-                  "y": -554.9932274681619,
-                  "zoom": -1.6
-                }
+                "file": "Layer 3/BAS - IPV4.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "API Authentication"
+              "icon": "lucide-file",
+              "title": "BAS - IPV4"
             }
           },
           {
@@ -115,7 +112,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 398.09375
+    "width": 398.09375,
+    "collapsed": true
   },
   "right": {
     "id": "3f4336170869a9cb",
@@ -220,28 +218,42 @@
       "bases:Create new base": false
     }
   },
-  "active": "ff814b5cb2a23b7a",
+  "active": "f2b02da37c308b80",
   "lastOpenFiles": [
-    "zPictures/Pasted image 20260813181600.png",
-    "zPictures/Pasted image 20260813181453.png",
-    "zPictures/Pasted image 20260813172013.png",
-    "zPictures/Pasted image 20260813170743.png",
-    "zPictures/Pasted image 20260813163527.png",
-    "Network Automation/REST API.canvas",
-    "Network Automation/API Authentication.canvas",
-    "zPictures/Pasted image 20260812161623.png",
-    "zPictures/Pasted image 20260812152428.png",
-    "zPictures/Pasted image 20260812144759.png",
-    "zPictures/Pasted image 20260812144532.png",
-    "Network Automation/Untitled.md",
-    "Network Automation/JSON, XML, and YAML.canvas",
+    "Pasted image 20260824214432.png",
+    "ConfigCommands/BAS Intro to CLI.md",
+    "ConfigCommands/BAS Ethernet Related Commands.md",
+    "Layer 3/BAS - IPV6.md",
+    "Layer 2/FEAT - DTP.md",
+    "Layer 2/FEAT - CDP and LLDP.md",
+    "Layer 2/BAS List of Standards.md",
+    "Layer 1/Hardware.md",
+    "Layer 1/Wire Standards.md",
+    "Layer 3/BAS - IPV4.md",
+    "Layer 1",
+    "Overview.canvas",
+    "ConfigCommands/SSH.md",
     "Network Automation/AI and Machine Learning.canvas",
+    "Network Automation/Ansible, Puppet, Chef.md",
+    "Network Automation/Terraform.md",
+    "zPictures/Pasted image 20260817182755.png",
+    "zPictures/Pasted image 20260817181721.png",
+    "zPictures/Pasted image 20260817181711.png",
+    "zPictures/Pasted image 20260817181709.png",
+    "zPictures/Pasted image 20260817180354.png",
+    "zPictures/Pasted image 20260817175736.png",
+    "Network Automation/Software-Defined Networking.md",
+    "zPictures/Pasted image 20260817174229.png",
+    "zPictures/Pasted image 20260817174128.png",
+    "zPictures/Pasted image 20260817173557.png",
+    "zPictures/Pasted image 20260817171046.png",
+    "Wireless Fundamentals/4. Wireless Configurations.canvas",
+    "Network Automation/API Authentication.canvas",
+    "Network Automation/REST API.canvas",
+    "Network Automation/JSON, XML, and YAML.canvas",
     "Network Automation/Network Automation.canvas",
-    "zPictures/Pasted image 20260810111839.png",
-    "zPictures/Pasted image 20260810110238.png",
     "Wireless Fundamentals/Configuration/Wireless Configurations.md",
     "Network Automation",
-    "Wireless Fundamentals/4. Wireless Configurations.canvas",
     "Blueprint/CCNA Topics.md",
     "Wireless Fundamentals/2. Wireless Architectures.canvas",
     "Wireless Fundamentals/Configuration",
@@ -252,7 +264,6 @@
     "Wireless Fundamentals/3. Wireless Security.canvas",
     "Wireless Fundamentals/1. Wireless Fundamentals.canvas",
     "Wireless Fundamentals",
-    "Overview.canvas",
     "Network Design",
     "Layer 5 or 7/Syslog.md",
     "Layer 5 or 7/SNMP.md",
@@ -263,20 +274,7 @@
     "Layer 5 or 7/DHCP.md",
     "Layer 5 or 7",
     "Layer 4/TCP and UDP.md",
-    "Layer 4/PORT - Port Numbers.md",
     "Layer 4",
-    "Layer 3/canvas",
-    "Layer 3/SEC - Standard ACLs.md",
-    "Layer 3/SEC - Extended ACLs.md",
-    "Layer 3/ROUT - RIP and EIGRP.md",
-    "Layer 3/ROUT - OSPF.md",
-    "Layer 3/ROUT - Dynamic Routing.md",
-    "Layer 3/REDUND - FHRP.md",
-    "Layer 3/FEAT - QoS (layer 3).md",
-    "Layer 3/FEAT - NAT.md",
-    "Layer 3/BAS - Subnetting.md",
-    "Layer 3/BAS - IPV6.md",
-    "Layer 3/BAS - IPV4.md",
-    "Layer 2/canvas"
+    "Layer 3/canvas"
   ]
 }
