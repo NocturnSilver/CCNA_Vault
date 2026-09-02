@@ -25,6 +25,9 @@
 
 ## Revision Number
 - every time a VLAN is added/modified/deleted, the revision number increases
+- Two methods to reset the VTP revision number to 0 are:
+	- Change the VTP mode to transparent 
+	- Change the VTP domain to an unused domain
 ## VTP Versions
 - v1 (default ) and v2
 	- does not support extended VLAN range (1006-4094)

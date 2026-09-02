@@ -16,7 +16,9 @@
 12. Unspecified IPV6  Address
 13. Loopback Address
 
-
+## Shortcuts
+1. Remove leading zeros from each hextet
+2. Replace one or more contiguous hextets consisting of zeroes with a double colon
 
 | a   | b   |
 | --- | --- |
