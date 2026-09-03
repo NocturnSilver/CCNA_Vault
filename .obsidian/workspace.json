@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Layer 3/ROUT - OSPF.md",
+                "file": "Layer 3/ROUT - Dynamic Routing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ROUT - OSPF"
+              "title": "ROUT - Dynamic Routing"
             }
           }
         ]
@@ -187,13 +187,13 @@
   },
   "active": "e4f1bbfb17acb47b",
   "lastOpenFiles": [
+    "Layer 3/ROUT - OSPF.md",
     "Layer 3/ROUT - RIP and EIGRP.md",
     "Layer 3/SEC - Standard ACLs.md",
     "Layer 3/Table of Commands.md",
     "Layer 3/Table of Info.md",
     "Layer 3/REDUND - FHRP.md",
     "Layer 3/ROUT - Dynamic Routing.md",
-    "Layer 3/ROUT - OSPF.md",
     "Layer 4/TCP and UDP.md",
     "Layer 3/SEC - Extended ACLs.md",
     "Layer 3/FEAT - QoS (layer 3).md",
