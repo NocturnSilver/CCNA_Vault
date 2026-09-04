@@ -21,4 +21,4 @@
 - the shutdown violation mode is enabled
 - Port security aging time is configured zero
 - Port security static aging is disabled
-- Port security aging type is configured to absolute
+- Port security aging type is configured to absoluteproto

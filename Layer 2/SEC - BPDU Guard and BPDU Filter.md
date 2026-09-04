@@ -1,5 +1,7 @@
 #layer2
 #layer2sec 
+#STP
+#STPtoolkit
 
 ## BPDU Guard
 - BPDU guard is a STP enhancement that is typically applied to edge ports that have PortFast enabled
