@@ -16,7 +16,7 @@
 		- distance vector
 			- RIP - routing information protocol
 			- EIGRP - Enhanced Interior Gateway Routing Protocol
-		- Link state
+		- Link state - every router creates a connectivity map of the network (uses more resources - cpu- on the router because more information is shared)
 			- OSPF - open shortest path first
 			- IS-IS - Intermediate System-to-Intermediate System
 - EGP - Exterior Gateway Protocol
