@@ -185,8 +185,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "ff814b5cb2a23b7a",
+  "active": "e4f1bbfb17acb47b",
   "lastOpenFiles": [
+    "Layer 2/Table of Info.md",
+    "Layer 2/FEAT - STP.md",
     "Layer 4/PORT - Port Numbers.md",
     "Layer 5 or 7/Syslog.md",
     "Layer 3/ROUT - Dynamic Routing.md",
@@ -215,8 +217,6 @@
     "Troubleshooting",
     "Wireless Fundamentals/Configuration/Untitled.md",
     "Layer 2/SEC - Port Security.md",
-    "Layer 2/FEAT - VTP (Vlan trunking protocol).md",
-    "Layer 2/SEC - DHCP Snooping.md",
     "zPictures/Pasted image 20260824214432.png",
     "Layer 1",
     "Overview.canvas",

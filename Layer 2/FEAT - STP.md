@@ -1,15 +1,19 @@
-#layer2
+	#layer2
 #STP 
 
 # Caution
 
-## Definitions
+## Definitions and Summary
 - IEEE 802.1D
 - BPDU - bridge protocol data unit
-
+- Superior BPDU - BPDU with a lower bridge ID
+- Bridge ID - used to elect a root bridge (Bridge priority + MAC addr)
+- Bridge Priority - the part of bridge ID that is first looked at to determine which should be elected as the root bridge
+- MAC address - used as the tie breaker is same bridge priority
 ## Context
 - most PCs only have a single network interface card (NIC), so they can only be plugged into a single switch. However, important servers typically have multiple NICs, so they can be plugged into multiple switches for redundancy
 - spanning tree protocol still uses the term bridge (even if switch is meant)
+- All interfaces on the root bridge are designated ports.
 
 ## What is Spanning Tree Protocol (STP)
 - a protocol, IEEE 802.1D, that prevents layer 2 loops by placing redundant ports in a blocking state, essentially disabling the interface
@@ -37,17 +41,46 @@
 ### Bridge ID and Election process for root bridge
 - Bridge ID - 64 bits - used to elect a root bridge for the network
 	- Bridge priority - 16 bits - has been update to 2 parts
-		- Bridge priority - 4 bits
+		- lowest bridge ID gets chosen
+		- #### Bridge priority - 4 bits
 			- the 4 bits signify (32768, 16384, 8192, 4096)
 			- which are $2^{15},2^{14},2^{13},2^{12}$
-		- Extended System ID (VLAN ID) - 12 bits
-			- the 12 bits signify 1 to 2048
+		- #### Extended System ID (VLAN ID) - 12 bits
+			- the 12 bits signify 1 to 2048 from right to left
+			- the because the extended system exists, if the native vlan is 1 and the default bridge priority is used, then we actually have 32768 + 1 = 32769
+			- the minimum unit of increase and decrease for bridge priority is 4096
 	- MAC address  - 48 bits
 - Default bridge ID priority is 32768 = ($2^{15}$) on all switches
 	- so by default the MAC address is used as the tie breaker 
 	- lowest MAC address becomes the root bridge (ex. A.A.A is lower than B.B.B)
 - note: Cisco switches use a version of STP called PVST (per-vlan Spanning Tree)
 	- it runs a separate STP instance in each VLAN, so in each VLAN different interfaces can be forwarding/blocking
+
+### Which Switch Sends BPDUs?
+1. When a switch powers on it assumed it is the root bridge
+2. It will only give up its position if it receives a superior BPDU (lower bridge ID)
+3. Once the topology has converged and all switches agree on the root bridge, only the root bridge sends BPDUs
+4. Other switches in the network will forward these BPDUs, but will not generate their own original BPDUs
+
+### Determine the port roles
+1. All ports on the root bridge are designated ports
+2. All ports on connected to endhosts are designated ports
+3. Each remaining SW will choose one of its interfaces to be its root port (forwarding state). Ports across from the root port are always designated ports. ROOT PORTS are selected based on:
+	1. lowest root cost
+	2. lowest neighbour bridge ID
+	3. if there are 2 connections, lowest neighbor port ID (def = 128) + port number
+4. Each remaining collision domain will select ONE interface to be a designated port (forwarding state). The other port in the collision domain will be non-designated (blocking). Designated port selection:
+	1. Interface on switch with lowest root cost
+	2. Interface on switch with lowest root bridge
+
+#### STP Table of  Root Path Costs 
+| Speed          | STP cost |
+| -------------- | -------- |
+| 10 Mbps        | 100      |
+| 100 Mbps       | 19       |
+| 1 Gbps         | 4        |
+| 10 Gbps        | 2        |
+| root path cost | 0        |
 
 
 
@@ -59,3 +92,12 @@
 | listening  |           |
 | learning   |           |
 | forwarding |           |
+
+## STP Commands
+| number | reason                                                                                                     | commands               |
+| ------ | ---------------------------------------------------------------------------------------------------------- | ---------------------- |
+| 1      | shows the following:<br>1. interface role<br>2. interface state<br>3. root cost<br>4. port ID priority nbr | SW# show spanning-tree |
+| 2      |                                                                                                            |                        |
+| 3      |                                                                                                            |                        |
+| 4      |                                                                                                            |                        |
+|        |                                                                                                            |                        |
