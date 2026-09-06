@@ -3,6 +3,10 @@
 #STP
 #STPtoolkit
 
+## Summary
+- when a BPDU guard enabled port receives a bpdu
+	- it is error-disabled (err-disabled)
+
 ## What is BPDU Guard
 - Automatically disbales a port if it receives a BPDU, protecting the STP topology by preventing unauthorized devices from becoming part of the network
 - BPDU guard is a STP enhancement that is typically applied to edge ports that have PortFast enabled
@@ -24,6 +28,15 @@
 ## What is BPDU Filter?
 - Stops a port from sending BPDUs or processing received BPDUs
 
+
+## BPDU Filter Mechanics
+- if BPDU Filter has been enabled in interface config mode
+	- it ignores the the BPDU it receives
+- if BPDU Filter has been enabled in global config mode
+	- if the port receives a BPDU PortFast and BPDU Filter are disabled and the port operates as a normal STP port
+- - prevents a switch port from sending BPDUs
+
+
 ### BPDU filter Commands
 
 | number | reason                                    | command                                                                     |
@@ -33,3 +46,12 @@
 | 3      | manually re-enable an err-disabled port   | no shutdown                                                                 |
 | 4      | automatically enable an err-disabled port | # errdusable recovery cause bpduguard<br><br># errdisable recovery interval |
 | 5      |                                           |                                                                             |
+
+## ErrDisable Recovery comands
+
+| Number | Reason                                                                     | Command                                  |
+| ------ | -------------------------------------------------------------------------- | ---------------------------------------- |
+| 1      | Configure ErrDisable recover for a specific command                        | # errdisable recover cause [cause]       |
+| 2      | Configure the interval for ErrDisable recovery (300s or 5m is the default) | # errdisable recovery interval [seconds] |
+| 3      | Show the errdisable recovery settings                                      | # Show errdisable recover                |
+|        |                                                                            |                                          |

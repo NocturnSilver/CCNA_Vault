@@ -51,4 +51,19 @@
 | 10 Gbps        | 2        | ~   |               |                                                                      |                   |
 | root path cost | 0        | ~   |               |                                                                      |                   |
 
+## STP Toolkit Information
+
+| STP Tool            | Reaction to receiving BPDUs                                                     |
+| ------------------- | ------------------------------------------------------------------------------- |
+| PortFast            |                                                                                 |
+| PortFast Default    |                                                                                 |
+| BPDU guard          | Err-disable the port                                                            |
+| BPDU guard Default  | Err-disable the port                                                            |
+| BPDU Filter         | Ignores the BPDU                                                                |
+| BPDU Filter Default | Turns off PortFast and BPDU Filter. Reverts to acting like an ordinary STP port |
+| Root guard          | (superior BPDU) broken (root inconsisten)                                       |
+| Root guard default  | (superior BPDU) broken (root inconsisten)                                       |
+| Loop guard          |                                                                                 |
+| Loop guard Default  |                                                                                 |
+|                     |                                                                                 |
 

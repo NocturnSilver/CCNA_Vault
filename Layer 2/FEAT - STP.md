@@ -127,11 +127,12 @@
 | BackboneFast | speeds up network recovery from indirect link failures by cutting the 20s max age timer reducing down time from 50s to 30s              |
 
 ## STP Commands
-| number | reason                                                                                                     | commands                                                   |
-| ------ | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| 1      | shows the following:<br>1. interface role<br>2. interface state<br>3. root cost<br>4. port ID priority nbr | SW# show spanning-tree \[vlan] [vlan-num]                  |
-| 2      | Configure the STP mode to use on the switch                                                                | SW(config)# spanning-tree mode [mst \| pvst \| rapid-pvst] |
-| 3      | Configure STP priority to 24576 to make it the root bridge. If a SW has that priority lower it by 4096     | SW(config)# spanning-tree vlan \[vlan-num] root primary    |
-| 4      | Configure the STP cost of an interface                                                                     | SW(config-if)# spanning-tree vlan [vlan-id] cost [cost]    |
-| 5      | View detailed STP information about an interface                                                           | SW# show spanning-tree interface [interface] detail        |
-| 6      | Configure PortFast on a trunk port                                                                         | SW(config-if)# spanning-tree portfast [edge] trunk         |
+| number | reason                                                                                                     | commands                                                            |
+| ------ | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 1      | shows the following:<br>1. interface role<br>2. interface state<br>3. root cost<br>4. port ID priority nbr | SW# show spanning-tree \[vlan] [vlan-num]                           |
+| 2      | Configure the STP mode to use on the switch                                                                | SW(config)# spanning-tree mode [mst \| pvst \| rapid-pvst]          |
+| 3      | Configure STP priority to 24576 to make it the root bridge. If a SW has that priority lower it by 4096     | SW(config)# spanning-tree vlan \[vlan-num] root primary             |
+| 4      | Configure the STP priority of an interface                                                                 | SW(config)# spanning-tree vlan \[vlan-num] port-priority [priority] |
+| 5      | Configure the STP cost of an interface                                                                     | SW(config-if)# spanning-tree vlan [vlan-id] cost [cost]             |
+| 6      | View detailed STP information about an interface                                                           | SW# show spanning-tree interface [interface] detail                 |
+| 7      | Configure PortFast on a trunk port                                                                         | SW(config-if)# spanning-tree portfast [edge] trunk                  |

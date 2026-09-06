@@ -4,6 +4,7 @@
 # Caution
 - only apply portfast to ports that are connected to end hosts
 - when postfast is applied also apply other security measures like loop guard, root guard, bpdu guard, and bpdu filter
+- when a portfast-enabled port receives a BPDU it will revert to acting like a regular STP port without portfast
 ## What is Portfast
 - it is a spanning tree optional feature that allows a port to move immediately to the forwarding state, bypassing listening and learning
 
