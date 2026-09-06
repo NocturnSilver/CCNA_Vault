@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Layer 2/FEAT - STP.md",
+                "file": "Layer 2/FEAT - DTP (Dynamic Trunking Protocol).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "FEAT - STP"
+              "title": "FEAT - DTP (Dynamic Trunking Protocol)"
             }
           }
         ]
@@ -185,8 +185,9 @@
       "bases:Create new base": false
     }
   },
-  "active": "ff814b5cb2a23b7a",
+  "active": "e4f1bbfb17acb47b",
   "lastOpenFiles": [
+    "Layer 2/FEAT - STP.md",
     "README.md~",
     "Layer 2/FEAT - RAPID STP.md",
     "Layer 2/SEC - STP - Loop Guard.md",
@@ -194,7 +195,6 @@
     "Layer 2/Table of Info.md",
     "Layer 2/SEC - STP -  BPDU Guard and BPDU Filter.md",
     "Layer 2/FEAT - STP - PortFast.md",
-    "Layer 2/FEAT - STP.md",
     "Layer 2/canvas/EtherChannel.canvas",
     "Layer 2/canvas/STP, RSTP, STP Toolkit.canvas",
     "Layer 2/FEAT - VTP (Vlan trunking protocol).md",
@@ -241,7 +241,6 @@
     "zPictures",
     "Wireless Fundamentals",
     "Network Design",
-    "Layer 5 or 7",
-    "Layer 4"
+    "Layer 5 or 7"
   ]
 }

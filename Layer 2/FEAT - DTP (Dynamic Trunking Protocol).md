@@ -7,8 +7,8 @@
 - by default all switch ports are access ports
 
 ## Trunk Encapsulation
-- ISL - favored by DTP -
-- 802.1q - 
+- ISL - favored by DTP 
+- 802.1q - IEEE standard
 
 ## What does it do?
 - it allows switches to negotiate status of switch ports
@@ -18,20 +18,12 @@
 ## Why do we want it?
 - trunk ports are related to VLANs
 - improve network performance by allowing switches to form trunk links automatically
-- 
 
 ## How does it do it?
 ### Switch port modes
-| Type                                                       | Reason                                                                                   | Command                                           |
-| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| Dynamic<br>Desirable<br>(default for older Cisco Switches) | forms a trunk if the other is either in switchport mode trunk, dynamic desirable, or aut | Switch(config)# switchport mode dynamic desirable |
-| Dynamic<br>Auto (default for newer Cisco SW)               | Forms a trunk if the other is either in switchport mode trunk                            | Switch(config)#<br>switchport mode dynamic auto   |
-| Trunk                                                      |                                                                                          |                                                   |
-| Access                                                     |                                                                                          |                                                   |
-### Other commands
-| Type      | Reason                                                     | Command                                                                           |
-| --------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Desirable | Two commands that disable DTP negotiation on a switch port Switch(config)# switchport mode access<br>Switch(config)# switchport nonegotiate t  |
-| Auto      |                                                                                                                                                |
-|           |                                                                                                                                                |
-|           |                                                                                                                                                |
+| Type                                                       | Reason                                                                                   | Command                                                                          |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Dynamic<br>Desirable<br>(default for older Cisco Switches) | forms a trunk if the other is either in switchport mode trunk, dynamic desirable, or aut | Switch(config)# switchport mode dynamic desirable                                |
+| Dynamic<br>Auto (default for newer Cisco SW)               | Forms a trunk if the other is either in switchport mode trunk                            | Switch(config)#<br>switchport mode dynamic auto                                  |
+| None                                                       | Two commands that disable DTP negotiation on a switch port                               | Switch(config)# switchport mode access<br>Switch(config)# switchport nonegotiate |
+
