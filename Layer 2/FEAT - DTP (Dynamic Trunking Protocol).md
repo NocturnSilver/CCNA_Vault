@@ -1,6 +1,10 @@
 #layer2
 #vlan
 #trunkport
+
+# Caution
+- DTP is a Cisco proprietary protocol. Therefore, it doesn't work on non Cisco switches
+
 ## Context
 - Trunk ports are used to carry traffic of more than one VLAN
 - if port transmits and receives more than one VLAN then it should be made trunk
@@ -20,6 +24,19 @@
 - improve network performance by allowing switches to form trunk links automatically
 
 ## How does it do it?
+- DTP frames are sent back and forth to advertise trunking capabilities.
+- Based on their configured modes the link either turns into a trunk or a static access link
+
+### Table of negotiations
+
+| Type      | Desirable | Auto   | Trunk                | Access               |
+| --------- | --------- | ------ | -------------------- | -------------------- |
+| Desirable | Trunk     | Trunk  | Trunk                | Access               |
+| Auto      | Trunk     | Access | Trunk                | Access               |
+| Trunk     | Trunk     | Trunk  | Trunk                | Limited Connectivity |
+| Access    | Access    | Access | Limited Connectivity | Access               |
+|           |           |        |                      |                      |
+
 ### Switch port modes
 | Type                                                       | Reason                                                                                   | Command                                                                          |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
