@@ -1,9 +1,15 @@
 ## IEEE Table standards
-| Number | Standard | Description            |
-| ------ | -------- | ---------------------- |
-| 1      | 802.1D   | Spanning Tree protocol |
-| 2      |          |                        |
-| 3      |          |                        |
+| Number | Standard | Description                                    |
+| ------ | -------- | ---------------------------------------------- |
+| 1      | 802.1D   | Spanning Tree protocol                         |
+| 2      | 802.12   | Rapid Spanning Tree Protocol                   |
+| 3      | 802.1s   | Multiple Spanning Tree protocol                |
+| 4      | 802.3    | Wired Ethernet Networks                        |
+| 5      | 802.3ad  | Link Aggregation Protocol (LACP -etherchannel) |
+| 6      |          |                                                |
+| 7      |          |                                                |
+| 8      |          |                                                |
+|        |          |                                                |
 ## MAC Addresses 
 
 | Number | MAC Address    | Reason                                          |

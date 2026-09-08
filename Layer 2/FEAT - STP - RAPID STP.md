@@ -81,14 +81,14 @@
 	- It then flushes all MAC addresses learned on that interface
 
 ### RSTP Link Types
-- Edge - a port that is connected to an end host. Mov
-- Point-to-point
-- Shared
+- Edge - a port that is connected to an end host. Moves directly to forwarding without negotiation.
+- Point-to-point - a direct connection between two switches.
+- Shared - a connection to a hub. Must operate in half-duplex mode.
 
 ## Commands
-| Number | Reason                                                                  | Commands                                  |
-| ------ | ----------------------------------------------------------------------- | ----------------------------------------- |
-| 1      | Shows stp detials like protocol, role, sts, cost, port cost, type, etc. | SW# show spanning-tree                    |
-| 2      | Configure rapid PVST on a switch                                        | SW(config)# spanning-tree mode rapid-pvst |
-| 3      |                                                                         |                                           |
-|        |                                                                         |                                           |
+| Number | Reason                                                                                                   | Commands                                              |
+| ------ | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| 1      | Shows stp detials like protocol, role, sts, cost, port cost, type, etc.                                  | SW# show spanning-tree                                |
+| 2      | Configure rapid PVST on a switch                                                                         | SW(config)# spanning-tree mode rapid-pvst             |
+| 3      | Configures the interface as point-to-point (it should be detectedd)                                      | SW(config-if)# spanning-tree link-type point-to-point |
+| 4      | Configure the interface as a shared port. Shared ports connect to another siwtch (or switches) via a hub | SW(config-if)# spanning-tree link-type shared         |
