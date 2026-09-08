@@ -14,7 +14,15 @@
 
 ## STP Information
 
-### Interface States
+### STP versions
+
+| IEEE Standard                       | Description                                                                                                                                                             | Cisco Equivalent                                | Description                                                                                                                        |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **802.1D - STP**                    | - all VLANs share one STP instance<br>- Therefore, cannot load balance                                                                                                  | Per-VLAN Spanning Tree (PVST)                   | - Cisco's upgrade to 802.1D<br>- Each VLAN has its own STP instance<br>- Can load balance by blocking different ports in each VLAn |
+| **802.1W - Rapid Spanning Tree**    | - Much faster at converging/adapting to network changes than 802.1D<br>- All VLANs share one STP instance<br>- Cannot load balance                                      | Rapid Per-VLAN Spanning Tree Plus (Rapid PVST+) | - Cisco's upgrade to 802.1W<br>- Each VLAN has its own STP instance<br>- Can load balance by blocking different ports in each VLAN |
+| **802.1S - Multiple Spanning Tree** | - Uses modified RSTP mechanics<br>- can group multiple VLANs into different instances (ie. VLANs 1-5 in instance 1, VLANs 6-10 in instance 2) to perform load balancing | None                                            | None                                                                                                                               |
+
+### STP (Interface) Port States
 | STP port state | Stable/<br>Transitional | port role      | send/<br>receive<br>regular network traffic? | SEND/Receive  BPDUs? | learn MAC address? | Default<br>Duration |
 | -------------- | ----------------------- | -------------- | -------------------------------------------- | -------------------- | ------------------ | ------------------- |
 | blocking       | Stable                  | non-designated | NO                                           | NO/YES               | NO                 | N/A                 |
@@ -22,6 +30,13 @@
 | learning       | Transitional            | N/A            | NO                                           | YES/YES              | YES                | 15s                 |
 | forwarding     | Stable                  | designated     | YES                                          | YES/YES              | YES                | N/A                 |
 | Disabled       | Stable                  | N/A            | NO                                           | NO/NO                | NO                 | N/A                 |
+
+### RSTP Port States
+| STP port state | Stable/<br>Transitional | port role      | send/<br>receive<br>regular network traffic? | SEND/Receive  BPDUs? | learn MAC address? |
+| -------------- | ----------------------- | -------------- | -------------------------------------------- | -------------------- | ------------------ |
+| Discarding     | Stable                  | non-designated | NO                                           | NO/YES               | NO                 |
+| learning       | Transitional            | N/A            | NO                                           | YES/YES              | YES                |
+| forwarding     | Stable                  | designated     | YES                                          | YES/YES              | YES                |
 
 ### Election steps
 1. lowest bridge priority is the root bridge
@@ -39,17 +54,27 @@
 	1. interface on switch with lowest root cost
 	2. interface on switch with lowest bridge ID
 
-#### STP Table of  Root Path Costs  and STP timers
+#### STP timers
 
-| Root path      | cost     | ~   | Spanning      | Tree                                                                 | Timers            |
-| -------------- | -------- | --- | ------------- | -------------------------------------------------------------------- | ----------------- |
-| ~              | ~        | ~   | ~             | ~                                                                    | ~                 |
-| Speed          | STP cost | ~   | STP Timer     | Purpose                                                              | Duration          |
-| 10 Mbps        | 100      | ~   | Hello         | frequency root bridge sends Hello BPDUs                              | 2 sec             |
-| 100 Mbps       | 19       | ~   | Forward Delay | How long switch stays in (each) Listening and Learning states        | 15 sec            |
-| 1 Gbps         | 4        | ~   | Max Age       | wait after ceasing to receive Hello BPDUs to change the STP topology | 20 sec (10*hello) |
-| 10 Gbps        | 2        | ~   |               |                                                                      |                   |
-| root path cost | 0        | ~   |               |                                                                      |                   |
+| Spanning       | Tree                                                                 | Timers            |
+| -------------- | -------------------------------------------------------------------- | ----------------- |
+| STP Timer      | Purpose                                                              | Duration          |
+| Hello          | frequency root bridge sends Hello BPDUs                              | 2 sec             |
+| Forward Delay  | How long switch stays in (each) Listening and Learning states        | 15 sec            |
+| Max Age        | wait after ceasing to receive Hello BPDUs to change the STP topology | 20 sec (10*hello) |
+| 10 Gbps        | 2                                                                    | ~                 |
+| root path cost | 0                                                                    | ~                 |
+#### STP and RSTP Root Costs
+
+| Speed     | STP Cost | RSTP Cost     |
+| --------- | -------- | ------------- |
+| 10 Mbps   | 100      | $2\times10^6$ |
+| 100 Mbps  | 19       | $2\times10^5$ |
+| 1 Gbps    | 4        | $2\times10^4$ |
+| 10 Gbps   | 2        | $2\times10^3$ |
+| 100 Gbps  | -        | $2\times10^2$ |
+| 1 Tbps    | -        | $2\times10^1$ |
+| root cost | 0        | -             |
 
 ## STP Toolkit Information
 

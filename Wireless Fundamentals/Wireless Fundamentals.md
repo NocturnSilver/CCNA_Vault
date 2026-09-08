@@ -3,8 +3,6 @@
 
 ## 802.11 Header
 
-
-
 ## Wireless LAN Controller
 - the service port interface of a wireless LAN controller (WLC) is the only available interface when the WLC is booting.
 - WLC can contain up to 4 static interfaces:
