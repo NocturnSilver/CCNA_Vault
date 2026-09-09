@@ -1,3 +1,4 @@
+#layer2 
 #STP 
 
 | IEEE Standard                       | Description                                                                                                                                                             | Cisco Equivalent                                | Description                                                                                                                        |

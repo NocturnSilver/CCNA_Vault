@@ -6,6 +6,8 @@
 ## Summary
 - when a BPDU guard enabled port receives a bpdu
 	- it is error-disabled (err-disabled)
+- Standard STP BPDUs are sent to destination mac address
+	- 01800.c200.0000
 
 ## What is BPDU Guard
 - Automatically disbales a port if it receives a BPDU, protecting the STP topology by preventing unauthorized devices from becoming part of the network

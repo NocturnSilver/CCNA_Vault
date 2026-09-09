@@ -1,3 +1,4 @@
+#layer2 
 ## IEEE Table standards
 | Number | Standard | Description                                    |
 | ------ | -------- | ---------------------------------------------- |
@@ -18,7 +19,8 @@
 | ------ | -------------- | ----------------------------------------------- |
 | 1      | 0180.c200.000  | Regular STP uses this destination MAC address   |
 | 2      | 0100.0ccc.cccd | PVST +BPDUs are sent to destination MAC address |
-|        |                |                                                 |
+| 3      | 0100.0ccc.cccc | CDP                                             |
+| 4      | 0180.c200.000e | LLDP                                            |
 
 ## STP Information
 

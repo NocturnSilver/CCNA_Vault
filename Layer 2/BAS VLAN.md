@@ -1,3 +1,4 @@
+#layer2 
 #vlan 
 #dot1q
 
