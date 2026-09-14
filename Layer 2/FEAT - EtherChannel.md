@@ -11,6 +11,7 @@
 - If an interface's configurations do not match the others, it will be excluded from the EtherChannel
 - When performing show spanning-tree only the portchannel interface is shown instead of individual interfaces
 - If a channel protocol is explicityl configured, each local switch port in the EtherChannel bundle must be configured to operate in a mode that is compatible with the channel protocol or the switch will display an error message and refuse to bundle the offending interface.
+- The EtherChannel group number does not have to match on neighbour devices
 ## Definitions and Key things
  - Oversubscription  - when the bandwidth of the interfaces connected to end hosts is greater than the bandwidth of the connection to the distribution switches. Some oversubscription is acceptable, but too much causes congestion
  - flow (load balancing) - communication between two nodes in the network

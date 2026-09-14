@@ -9,6 +9,7 @@
 - LLDP is usually disabled on Cisco devices by default, so it must be enabled manually
 - A device can run CDP and LLDP at the same time
 - CDP/LLDP can be applied to all applicable network devices since its a disovery protocol.
+- default CDP version = 2
 
 ## Context 
 - CDP and LLDP are layer 2 discovery protocols
