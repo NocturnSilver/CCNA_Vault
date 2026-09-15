@@ -1,5 +1,9 @@
 #layer2
 #layer2sec 
+
+## Troubleshooting
+- An interface-level DAI configuration overrides a global virtual local area network (VLAN) DAI configuration, even if the port that is configured with the interface-level comand is assigned to a VLAN after the interface-level command has bee issued
+
 ## Commands
 | Number | Reason                                                                     | Command                                                   |
 | ------ | -------------------------------------------------------------------------- | --------------------------------------------------------- |

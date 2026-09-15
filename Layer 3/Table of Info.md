@@ -15,6 +15,17 @@
 | External EIGRP           | 170 |
 | iBGP                     | 200 |
 | Unknown                  | 255 |
+
+### Addresses used by Routing Protocols
+
+| Protocol | Address                | Additional info                                                                                                                                                                                                                                                                         |
+| -------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RIPv1    | 255.255.255.255        |                                                                                                                                                                                                                                                                                         |
+| RIPv2    | 224.0.0.9              |                                                                                                                                                                                                                                                                                         |
+| RIPng    | FF02::9                | Address is used for periodic routing updates                                                                                                                                                                                                                                            |
+| EIGRP    | 224.0.0.10<br>FF02::A  | - Multicast IPv4 address. Used to send hello packets and routing updates to all adjacent EIGRP routers on the same segment                                                                                                                                                              |
+| OSPF     | 224.0.0.5<br>224.0.0.6 | - Used by all OSPF routers to send and receive Hello Packets for neighbor discovery and maintenance. DR and BDR use this address to send routing updates to all other routers<br>- Used by non-DR and non-BDR routers to send link state updates and ack specifically to the DR and BDR |
+|          |                        |                                                                                                                                                                                                                                                                                         |
 ### Dynamic Routing Protocol Codes
 | Code | Definition            | Code | Definition                | Code | Definition                       |
 | ---- | --------------------- | ---- | ------------------------- | ---- | -------------------------------- |

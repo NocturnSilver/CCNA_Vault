@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Layer 3/ROUT - Dynamic Routing.md",
+                "file": "Layer 2/SEC - Dynamic ARP Inspection (DAI).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ROUT - Dynamic Routing"
+              "title": "SEC - Dynamic ARP Inspection (DAI)"
             }
           }
         ],
@@ -216,13 +216,14 @@
   },
   "active": "e04a0e054ce8b5b6",
   "lastOpenFiles": [
-    "Layer 3/Table of Info.md",
-    "Layer 3/ROUT - Dynamic Routing.md",
-    "Layer 3/REDUND - FHRP.md",
-    "Layer 3/FEAT - NAT.md",
-    "Layer 3/Table of Commands.md",
     "Layer 3/ROUT - RIP and EIGRP.md",
+    "Layer 3/ROUT - Dynamic Routing.md",
     "Layer 3/ROUT - OSPF.md",
+    "Layer 3/Table of Commands.md",
+    "Layer 3/Table of Info.md",
+    "Layer 3/REDUND - FHRP.md",
+    "Layer 3/FEAT - QoS (layer 3).md",
+    "Layer 3/FEAT - NAT.md",
     "Layer 5 or 7/DHCP.md",
     "Network Automation/Network Automation.canvas",
     "Troubleshooting/OS - Windows.md",
@@ -251,7 +252,6 @@
     "Network Automation/Ansible, Puppet, Chef.md",
     "Network Automation/AI and Machine Learning.canvas",
     "Layer 5 or 7/DNS.md",
-    "Layer 4/TCP and UDP.md",
     "Overview.canvas",
     "README.md~",
     "Troubleshooting",
