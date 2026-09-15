@@ -6,6 +6,12 @@
 - Host route - A route to a specific host (/32)
 - distance vector (IGRP) - the term comes from the idea that the routers only learn the 'distance' (metric) and 'vector' (direction, the next hop-router) of each route
 - link state (IGRP) - 
+- floating static route - a route which has a higher AD than a route learned via a dynamic routing protocol
+
+## Troubleshooting
+- Metric is used to compare routes learned from the same routing protocol
+- Before comparing metrics, AD is used to select the best route.
+- IS-IS - all links have a metric cost of 10 by default
 
 ## What is a Dynamic Routing Protocol
 - It is a protocol that automates the addition of routes in the routing table
@@ -69,8 +75,21 @@
 |      |                       |      |                           | %    | next hope override               |
 ### Dynamic Routing Protocol Metrics
 
-
+| IGP   | Metric                                               | Explanation                                                                                                                                                               |
+| ----- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RIP   | Hop count                                            | Each router in the path counts as one hop. Total metric is the total number of hops to the destination. Links of all speeds are equal                                     |
+| EIGRP | Metric Based on bandwidth <br>and delay (by default) | Complex formula that can take into account many values. By default, the bandwidth of the slowest link in the route and the total delay of all links in the route are used |
+| OSPF  | Cost                                                 | Cost of each link is calculated based on bandwidth. The total metric is the total cost of each link in the route                                                          |
+| IS-IS | Cost                                                 | The total metric is the total cost of each link in the route. The cost of each link is not automatically calculated by default. All links have a cost of 10 by default.   |
 ## Administrative distances for routing protocols
+- in most cases a company will only use a single IGP (usually OSPF or EIGRP).
+- However, in some rare cases they might use two. For example, if two companies connect their networks to share information, two different routing protocols might be in use.
+- Metric is used to compare routes learned via the same routing protocol.
+- Different routing protocols use totally different metrics, so they cannot be compared.
+- For example, an OSPF route to 192.168.4.0/24 might have a metric of 30, while an EIGRP route to the same destination might have a metric of 33280.
+	- which route is better? Which route should the router put in the route table? = AD is used to determine which routing protocol is preferred
+- Lower AD is preferred, and indicates that the routing protocol is considered more 'trustworthy' (more likely to select good routes).
+- If the administrative distance is 255, the router does not believe the source of that route and does not install the route in the routing table.
 
 | Route Source             | AD  |
 | ------------------------ | --- |
@@ -85,14 +104,14 @@
 | RIP                      | 120 |
 | External EIGRP           | 170 |
 | iBGP                     | 200 |
-| Unknown                  | 255 |
+| Unknown/Unusable         | 255 |
 
 ## Commands
 
-| number | reason                                       | command                            |
-| ------ | -------------------------------------------- | ---------------------------------- |
-| 1      | configure the routing protocol               | R(config)#router rip               |
-| 2      | Configure the distance in router config mode | R(config-router)#distance [number] |
-| 3      | View the AD of the best route to a network   | R#show ip route                    |
-|        |                                              |                                    |
+| number | reason                                       | command                                                 |
+| ------ | -------------------------------------------- | ------------------------------------------------------- |
+| 1      | configure the routing protocol               | R(config)#router [protocol]                             |
+| 2      | Configure the distance in router config mode | R(config-router)#distance [number]                      |
+| 3      | View the AD of the best route to a network   | R#show ip route                                         |
+| 4      | Configure the route and the AD               | R(config)# ip route \[addr] \[netmask] \[next-hop] [AD] |
 
