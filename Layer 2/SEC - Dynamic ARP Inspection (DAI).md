@@ -3,6 +3,8 @@
 
 ## Troubleshooting
 - An interface-level DAI configuration overrides a global virtual local area network (VLAN) DAI configuration, even if the port that is configured with the interface-level comand is assigned to a VLAN after the interface-level command has bee issued
+- When DAI is configured on a switch, ports are labeled as either trusted or untrusted.
+- A port is configured as an untrusted port when DAI is enabled on that port
 
 ## Commands
 | Number | Reason                                                                     | Command                                                   |

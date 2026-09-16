@@ -1,4 +1,29 @@
 #layer3
+
+## IP Addresses
+
+
+### Table of Multicast Addresses
+
+| Multicast Address              | IPv4       | IPv6    |
+| ------------------------------ | ---------- | ------- |
+| All hosts                      | 224.0.0.1  | FF02::1 |
+| All Routers                    | 224.0.0.2  | FF02::2 |
+| All OSPF Routers               | 224.0.0.5  | FF02::5 |
+| All OSPF DRs                   | 224.0.0.6  | FF02::6 |
+| All RIP Routers (except RIPv1) | 224.0.0.9  | FF02::9 |
+| All EIGRP routers              | 224.0.0.10 | FF02::A |
+
+### Table of IPv6 Multicast Scopes
+| Multicast Address    | IPv6 address |
+| -------------------- | ------------ |
+| node-local           | FF01::/16    |
+| link-local           | FF02::/16    |
+| site-local           | FF05::/16    |
+| organizational-local | FF08::/16    |
+| global               | FF0E::/16    |
+
+
 ## Dynamic Routing Protocol
 
 | Route Source             | AD  |

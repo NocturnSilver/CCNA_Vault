@@ -90,16 +90,45 @@
 2. Highest IP address on a loopback interface
 3. Highest IP address on a physical interface
 
+### EIGRP Metric
+- EIGRP uses bandwidth and delay to calculate metric$$*[K1*bandwidth+(K2*bandwidth)/(256-load)+K3*delay]*[K5/(reliability + K4)])*256$$
+-  The default K values are K1 = 1, K2 = 0, K3 = 1, K4 =0, K5 = 0
+- You can simplify the formula like this: metric = bandwidth + delay
+
+### EIGRP Terminology
+- example: via 10.0.12.2 (28672/28416), GigabitEthernet0/0
+- feasible distance 
+	- the router's metric value to the route's destination
+	- the metric on the left is the feasible distance (28672)
+- Reported distance
+	- the neighbor's metric value to the route's destination
+	- the metric on the right is the reported distance (28416)
+- Successor 
+	- the route with the lowest metric to the destination (the best route)
+- Feasible Successor
+	- an alternate route to the destination (not the best route) which meets the feasibility condition
+- feasibility condition
+	- a route is considered a feasible successor if its reported distance is lower then the successor route's feasible distance
+	- It guarantees not to be a looped route (loop prevention system)
+
+### EIGRP Unequal-Cost-Load-Balancing
+- variance 1 = only ECMP load-balancing will be performed
+- a route's feasible distance must be equal to the successor route to be chosen
+- variance 2 = feasible successor routes with an FD up to 2x the successor route's FD can be used to load-balance
+- EIGRP will only perform unequal-cost load balancing over feasible successor routes. If a route doesn't meet the feasibility requirement, it will never be selected for load-balancing, regardless of the variance
+
 ### Table of Commands for EIGRP
-| Number | Reason                                                                                                                                                       | Command                                                                                        |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| 1      | Enter EIGRP configuration mode. the AS number must match between routers, or they will not form an adjacency and share route information                     | R(config)#router eigrp [AS-number]                                                             |
-| 2      | Disable auto-conversion of address to classful networks. Might be disabled/enabled by default depending on the router/IOS version                            | R(config-router)# no auto-summary                                                              |
-| 3      |                                                                                                                                                              |                                                                                                |
-| 4      | Tells router to look for interfaces with an IP address within specified range. Then activate EIGRP on the interfaces that fall in the range.                 | R(config-router)# network [ip-addr] [wildcard-mask]                                            |
-| 5      | Tells the router to stop sending RIP advertisements out of the specified interface. Use on interfaces which don't have any RIP neighbours and loopback       | R(config-router)#passive-interface [interface]                                                 |
-| 6      | Advertise a default route into RIP. Setup the default route first then perform the 2nd step                                                                  | R(config)# ip route 0.0.0.0 0.0.0.0 [next-hop]<br><br>R(config)# default-information originate |
-| 7      | Shows the routing protocol information                                                                                                                       | R#show ip protocols                                                                            |
-| 8      | configure the maximum paths that RIP will insert for the same destination in the routing table if they have the same metric. This if for ECMP load-balancing | R(config-router)# maximum-paths <br><1-32>                                                     |
-| 9      | set the administrative distance of RIP                                                                                                                       | R(config-router)# distance <1-255>                                                             |
-| 10     | Manually set the EIGRP router ID. Should be in the format of 4 binary octets                                                                                 | R(config-router)# eigrp router-id [A.B.C.D]                                                    |
+| Number | Reason                                                                                                                                                         | Command                                                                                        |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 1      | Enter EIGRP configuration mode. the AS number must match between routers, or they will not form an adjacency and share route information                       | R(config)#router eigrp [AS-number]                                                             |
+| 2      | Disable auto-conversion of address to classful networks. Might be disabled/enabled by default depending on the router/IOS version                              | R(config-router)# no auto-summary                                                              |
+| 3      | Tells router to look for interfaces with an IP address within specified range. Then activate EIGRP on the interfaces that fall in the range.                   | R(config-router)# network [ip-addr] [wildcard-mask]                                            |
+| 4      | Tells the router to stop sending RIP advertisements out of the specified interface. Use on interfaces which don't have any RIP neighbours and loopback         | R(config-router)#passive-interface [interface]                                                 |
+| 5      | Advertise a default route into RIP. Setup the default route first then perform the 2nd step                                                                    | R(config)# ip route 0.0.0.0 0.0.0.0 [next-hop]<br><br>R(config)# default-information originate |
+| 6      | Shows the routing protocol information                                                                                                                         | R#show ip protocols                                                                            |
+| 7      | configure the maximum paths that RIP will insert for the same destination in the routing table if they have the same metric. This if for ECMP load-balancing   | R(config-router)# maximum-paths <br><1-32>                                                     |
+| 8      | set the administrative distance of RIP                                                                                                                         | R(config-router)# distance <1-255>                                                             |
+| 9      | Manually set the EIGRP router ID. Should be in the format of 4 binary octets                                                                                   | R(config-router)# eigrp router-id [A.B.C.D]                                                    |
+| 10     | Shows the successor, feasible distance and reported distance                                                                                                   | R# show ip eigrp topology                                                                      |
+| 11     | Sets the multiplier for unequal-cost-load-balancing. Successor FD is multiplied by number set to determine the upper boundary of FD allowed for load-balancing | R(config-router)# variance <1-128>                                                             |
+
