@@ -15,10 +15,14 @@
 - backbone area (area 0) - area that all other areas must connect to
 - internal routers - routers with all interfaces in the same area
 - area border routers (ABRs) - routers with interfaces in multiple areas
-	- 
+- backbone routers - connected to the backbone area (area 0)
+- intra-area route - route to a destination inside the same OSPF area
+- interarea route - route to a destination in a different OSPF area
+- autonomous system boundary router (ASBR) is an OSPF router that connects the OSPF network to an external network.
 
-## Troubleshooting
+## Troubleshooting Areas
 - Small networks can be single-area without any negative effects on performance.
+- By dividing a large OSPF network into several smaller areas, you can avoid the negative effects
 - In larger networks, a single-area design can have negative effects:
 	- The SPF algorithm takes more time to caclulate routes
 	- The SPF algorithm requires exponentially more processing power on the routers
@@ -26,6 +30,12 @@
 	- any small change in the network causes every router to flood LSAs and run the SPF algorithm again
 - Area border routers (ABRs) maintains a separate LSDB for each area they are connected to
 	- recommended that you connect an ABR to a maximum of 2 areas.
+	- connecting an ABR to 3+ areas can overburden the router
+- OSPF areas should be contiguous (not split into non-connecting areas)
+## Troubleshooting Configuration
+- Once the DR/BDR are selected they will keep their roles until OSPF is reset.
+- MTU mismatch will cause the routers to be stuck in the exstart, exchange, or loading states
+- OSPF configurations requires you to specify the area and the area specified must be the same for all interfaces participating in OSPF
 
 ## What is OSPF (Open Shortest Path First)
 - Uses the Shortest Path First algorithm of Dutch computer scientist Edsger Dijkstra (Dijkstra's algorithm)
@@ -47,14 +57,25 @@
 2. Exxchange LSAs - with neighbour routers.
 3. Calculate the best routes - to each destination, and insert them into the routing table
 
-### OSPF Areas
+### OSPF Areas Definition
 - OSPF areas are used to divide the up the network.
-
-- By dividing a large OSPF network into several smaller areas, you can avoid the negative effects
 - An area is a set of routers and links that share the same LSDB
 - The backbone area (area 0) is an area that all other areas must connect to 
 - Routers with all interfaces in the same area are called internal routers
 - Routers with interfaces in multiple areas are called area border routers (ABRs)
+- backbone routers - connected to the backbone area (area 0)
+- intra-area route - route to a destination inside the same OSPF area
+- interarea route - route to a destination in a different OSPF area
+
+### OSPF Areas Rules
+- OSPF areas should be contiguous (not split into non-connecting areas)
+- All OSPF areas must have at least one ABR connected to the backbone area
+- OSPF interfaces in the same subnet must be in the same area
+
+### Router ID order of priority (same with EIGRP)
+1. Manual configuration
+2. Highest IP address on a loopback interface
+3. Highest IP address on a physical interface
 
 ## Message Timers
 - The dead timers are always 4x the hello timer amount
@@ -67,9 +88,7 @@
 | Point-to-Point                                               | Dead Timer  | 40s  |
 | Non-Broadcast Multi-Access <br>(NBMA) / Point-to-Multipoint: | Hello Timer | 30s  |
 | Non-Broadcast Multi-Access <br>(NBMA) / Point-to-Multipoint: | Dead Timer  | 120s |
-## Troubleshooting
-- Once the DR/BDR are selected they will keep their roles until OSPF is reset.
-- MTU mismatch will cause the routers to be stuck in the exstart, exchange, or loading states
+
 
 ## Definitions
 - DR
@@ -90,10 +109,6 @@
 | 6      | Loading  |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | 7      | Full     |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
-# Definitions and Theory
-
-## What is OSPF
-- 
 
 ## OSPF Network Types
 - connection between OSPF neighbors  (ethernet, etc.)
@@ -157,6 +172,20 @@
 
 ## OSPF Commands
 
+### Basic OSPF Configurations
+| number | reason                                                                                                                                                                                                                                                                           | Command                                                                              |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| 1      | OSPF Process must not be shutdown.<br>OSPF process ID is locally significant. Routers with different process IDs can become OSPF neighbors                                                                                                                                       | R(config)# router ospf [process-number 1-65535]<br><br>R(config-router)# no shutdown |
+| 2      | Look for any interface with an IP address contained in the range specified in the network command.<br><br>OSPF uses wildcard masks. OSPF network requires you to specify the area.                                                                                               | R(config-router)# network \[ip-addr] \[netmask] \[area-number]                       |
+| 3      | Tells the router to stop sending OSPF 'hello' messages out of the interface.<br>However, the router will continue to send LSAs informing it's neighbours about the subnet configured on the interface<br><br>Use this command on interfaces which don't have any OSPF neighbours | R(config-router)# passive-interface [interface-id]                                   |
+| 4      | Set the default gateway                                                                                                                                                                                                                                                          | R(config)# ip route 0.0.0.0 0.0.0.0 [interface \|next-hop]                           |
+| 5      | Allow the interface to advertise the default gateway to other OSPF devices                                                                                                                                                                                                       | R(config-router)#default-information originate                                       |
+| 6      | Shows the codes, gateway of last resort, and protocol set on the interfaces                                                                                                                                                                                                      | R# show ip route                                                                     |
+| 7      | Configure the router ID in ip address format                                                                                                                                                                                                                                     | R(config-router)# router-id [A.B.C.D]                                                |
+| 8      | Reset all OSPF process. Usually a bad idea for real systems                                                                                                                                                                                                                      | R# clear ip ospf process                                                             |
+| 9      | Configure the maximum paths for load balancing                                                                                                                                                                                                                                   | R(config-router)# maximum-paths <1-32>                                               |
+| 10     | Change the administrative distance                                                                                                                                                                                                                                               | R(config-router)# distance <1-255>                                                   |
+
 ### Broad cast network type List of priority Commands
 
 | number | reason          | Command                            |
@@ -164,12 +193,12 @@
 | 1      | View priority   | R# show ospf interface [interface] |
 | 2      | Change priority | R(config-if)# ip ospf <0-255>      |
 ### Broadcast Network Troubleshooting
-| number | reason                                                                                                  | Command                                                                                                                                                                                              |
-| ------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1      | OSPF Process must not be shutdown                                                                       | R(config)# router ospf [number]<br><br>R(config-router)# no shutdown                                                                                                                                 |
-| 2      | Hello and Dead timers must match.<br>Using the no option resets it back to the default seconds used.    | R(config-if)# ip ospf hello-interval \<seconds><br>R(config-if)# n ip ospf hello-interval \<seconds><br><br>R(config-if)# ip ospf dead-interval \<seconds><br>R(config-if)# no ip ospf dead-interval |
-| 3      | Authentication settings must match<br>1. first command enables auth<br>2. 2nd command sets the password | R(config-if)# ip ospf authentication<br><br>R(config-if)# ip ospf authentication-key \<password>                                                                                                     |
-| 4      | IP MTU settings must match. Can become OSPF neighbors but wont operate properly                         | R(config-if)# ip MTU y \<bytes>                                                                                                                                                                      |
+| number | reason                                                                                                                                     | Command                                                                                                                                                                                              |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1      | OSPF Process must not be shutdown.<br>OSPF process ID is locally significant. Routers with different process IDs can become OSPF neighbors | R(config)# router ospf [process-number 1-65535]<br><br>R(config-router)# no shutdown                                                                                                                 |
+| 2      | Hello and Dead timers must match.<br>Using the no option resets it back to the default seconds used.                                       | R(config-if)# ip ospf hello-interval \<seconds><br>R(config-if)# n ip ospf hello-interval \<seconds><br><br>R(config-if)# ip ospf dead-interval \<seconds><br>R(config-if)# no ip ospf dead-interval |
+| 3      | Authentication settings must match<br>1. first command enables auth<br>2. 2nd command sets the password                                    | R(config-if)# ip ospf authentication<br><br>R(config-if)# ip ospf authentication-key \<password>                                                                                                     |
+| 4      | IP MTU settings must match. Can become OSPF neighbors but wont operate properly                                                            | R(config-if)# ip MTU y \<bytes>                                                                                                                                                                      |
 
 ### Point to point clock settings
 | number | reason                                                                          | Command                                                                          |
