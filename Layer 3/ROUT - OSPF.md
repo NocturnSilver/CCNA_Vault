@@ -1,7 +1,6 @@
 #layer3
 #routingprotocol
 
-# Important Information lookups
 ## OSPF addresses
 | number | Type               | Address                | Description |
 | ------ | ------------------ | ---------------------- | ----------- |
@@ -9,6 +8,54 @@
 | 2      | Messages to DR/BDR | multicast<br>224.0.0.6 |             |
 |        |                    |                        |             |
 |        |                    |                        |             |
+## Definitions
+- Link State Advertisements (LSAs)
+- Link State Database (LSDBs)
+- area - set of routers and links that share the same LSDB
+- backbone area (area 0) - area that all other areas must connect to
+- internal routers - routers with all interfaces in the same area
+- area border routers (ABRs) - routers with interfaces in multiple areas
+	- 
+
+## Troubleshooting
+- Small networks can be single-area without any negative effects on performance.
+- In larger networks, a single-area design can have negative effects:
+	- The SPF algorithm takes more time to caclulate routes
+	- The SPF algorithm requires exponentially more processing power on the routers
+	- The larger LSDB takes up more memory on the routers 
+	- any small change in the network causes every router to flood LSAs and run the SPF algorithm again
+- Area border routers (ABRs) maintains a separate LSDB for each area they are connected to
+	- recommended that you connect an ABR to a maximum of 2 areas.
+
+## What is OSPF (Open Shortest Path First)
+- Uses the Shortest Path First algorithm of Dutch computer scientist Edsger Dijkstra (Dijkstra's algorithm)
+- Has 3 versions
+	- OSPFv1 (1989): OLD, not in use anymore
+	- OSPFv2 (1998): Used for IPv4 
+	- OSPFv3 (2008): Used for IPv6 (can also be used for IPv4, but usually v2 is used)
+- Router store information about the network in LSAs (Link State Advertisments) which are organized in a structure called LSDB (Link State Database)
+- Routers will Flood LSAs until all routers in the OSPF area develop the same map of the network (LSDB)
+
+### LSA Flooding
+- When OSPF is enabled on an interface, the router creates an LSA to tell its neighbours about the network.
+- The LSA is flooded throughout the network until all routers have received it
+- This results in all routers sharing the same LSDB
+- Each router then uses SPF algorithm to calculate the best route
+
+### Steps in the process of sharing LSAs
+1. Become Neighbours - with other routers connected to the same segment
+2. Exxchange LSAs - with neighbour routers.
+3. Calculate the best routes - to each destination, and insert them into the routing table
+
+### OSPF Areas
+- OSPF areas are used to divide the up the network.
+
+- By dividing a large OSPF network into several smaller areas, you can avoid the negative effects
+- An area is a set of routers and links that share the same LSDB
+- The backbone area (area 0) is an area that all other areas must connect to 
+- Routers with all interfaces in the same area are called internal routers
+- Routers with interfaces in multiple areas are called area border routers (ABRs)
+
 ## Message Timers
 - The dead timers are always 4x the hello timer amount
 
