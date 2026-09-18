@@ -39,14 +39,17 @@
             "id": "e04a0e054ce8b5b6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "Layer 3/ROUT - OSPF.md",
-                "mode": "source",
-                "source": false
+                "file": "Layer 3/canvas/Untitled.canvas",
+                "viewState": {
+                  "x": -322,
+                  "y": 584.2384905660377,
+                  "zoom": -0.4095830691867358
+                }
               },
-              "icon": "lucide-file",
-              "title": "ROUT - OSPF"
+              "icon": "lucide-layout-dashboard",
+              "title": "Untitled"
             }
           }
         ],
@@ -216,9 +219,14 @@
   },
   "active": "e04a0e054ce8b5b6",
   "lastOpenFiles": [
-    "Layer 3/ROUT - RIP and EIGRP.md",
-    "Layer 3/ROUT - OSPF.md",
     "Layer 3/ROUT - Dynamic Routing.md",
+    "Layer 3/ROUT - RIP and EIGRP.md",
+    "Layer 3/SEC - Extended ACLs.md",
+    "Layer 3/SEC - Standard ACLs.md",
+    "Layer 3/canvas/Untitled.canvas",
+    "Layer 3/canvas/Dynamic Routing Protocol.canvas",
+    "Layer 3/BAS - IPV4.md",
+    "Layer 3/ROUT - OSPF.md",
     "Layer 3/Table of Info.md",
     "Wireless Fundamentals/Table of Commands.md",
     "Layer 2/SEC - Dynamic ARP Inspection (DAI).md",
@@ -246,13 +254,8 @@
     "Layer 2/FEAT - CDP and LLDP.md",
     "Layer 2/FEAT - EtherChannel.md",
     "Layer 2/Table of Info.md",
-    "Wireless Fundamentals/Configuration/Untitled.md",
-    "Network Automation/Terraform.md",
-    "Network Automation/Software-Defined Networking.md",
     "Network Automation/JSON, XML, and YAML.canvas",
     "Network Automation/API Authentication.canvas",
-    "Network Automation/AI and Machine Learning.canvas",
-    "Overview.canvas",
     "README.md~",
     "Troubleshooting",
     "zPictures/Pasted image 20260824214432.png",
