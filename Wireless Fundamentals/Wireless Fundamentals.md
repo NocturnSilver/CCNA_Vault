@@ -1,5 +1,12 @@
 ## Context
 - Lightweight Access Point Protocol (LWAPP) communications
+- IEEE 802.11 standards used for wireless LANs
+- Wi-Fi Alliance - trademarks Wi-Fi and tests and certifies equipment for 802.11 standards compliance interoperability with other devices.
+
+## Wireless Issues
+- all devices within range receives all frames, like devices connected to an ethernet hub
+	- privacy of data within the LAN is a greater concern.
+	- CSMA/CA (carrier sense multiple access with collision avoidance) is used to facilitate half-duplex communications
 
 ## 802.11 Header
 
