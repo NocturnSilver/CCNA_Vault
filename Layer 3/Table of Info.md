@@ -1,5 +1,12 @@
 #layer3
 
+## MAC address
+
+| Protocol | syntax         | IP address                       | MAC address                              |
+| -------- | -------------- | -------------------------------- | ---------------------------------------- |
+| HSRP     | active/standby | V1: 224.0.0.2<br>V2: 224.0.0.102 | V1: 0000.0c07.acxx<br>V2: 0000.0c9F.Fxxx |
+| VRRP     | mastery/backup | 224.0.0.18                       | 0000.5e00.01xx                           |
+| GLBP     | AVG/AVE        | 224.0.0.102                      | 0007.6400.xxyy                           |
 ## IP Addresses
 
 
