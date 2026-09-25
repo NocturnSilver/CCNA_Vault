@@ -22,13 +22,13 @@
 | All EIGRP routers              | 224.0.0.10 | FF02::A |
 
 ### Table of IPv6 Multicast Scopes
-| Multicast Address    | IPv6 address |
-| -------------------- | ------------ |
-| node-local           | FF01::/16    |
-| link-local           | FF02::/16    |
-| site-local           | FF05::/16    |
-| organizational-local | FF08::/16    |
-| global               | FF0E::/16    |
+| Multicast Address    | IPv6 address | Description                                                                                                         |
+| -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------- |
+| interface/node-local | FF01::/16    | packet doesn't leave the local device. Can be used to send traffic to a service within the local device             |
+| link-local           | FF02::/16    | the packet remains in the local subnet. Routers will not route the packet between subnets.                          |
+| site-local           | FF05::/16    | The packet can be forwarded by routers. Should be limited to a single physical location. (not forwarded over a WAN) |
+| organizational-local | FF08::/16    | Wider in scope than site-local (an entire company/organisation)                                                     |
+| global               | FF0E::/16    | No boundaries. Possible to be routed over the internet                                                              |
 
 
 ## Dynamic Routing Protocol
