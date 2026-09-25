@@ -51,8 +51,18 @@
 - 128 bit address
 - every additional bit double the number of possible addresses so there are 340,282,366,920,938,463,463,374,607,431,768,211,456 addresses
 
-## IPv6 Header
+## IPv6 Header (40 bytes)
 ![[Pasted image 20260925134643.png]]
+- 1st Row (VTF)
+	- Version - 4 bits - indicates version of IP that is used (0b0110)
+	- Traffic class- 8 bits - used for QoS, indicate high priority traffic
+	- Flow Label - 20 bits - used to identify traffic flows (communications between a specific source and destination)
+- 2nd Row (PNH)
+	- Payload Length - 16 bits - length of encapsulated layer 4 segment in bytes
+	- Next Header - indicates the type of the next header (header of the encapsulated segment), for example TCP or UDP (same function as IPv4 protocol field)
+	- Hop Limit - the value in this field i decremeneted by 1 by each router that forwards it. If it reaches 0, the packet is discarded. Same function as the IPv4 header's 'TTL' field
+- 3rd Row - source address - 128 bits
+- 4th row - destination address - 128 bits
 
 ### RFC 5952 'A recommendation for IPv6 Address Text Representation'
 - leading 0's MUST be removed
@@ -202,19 +212,109 @@
 - Messages sent to this address are processed within the local device, but not sent to other devices.
 - IPv4 equivalent: 127.0.0..0/8
 
-## IPv6 Routing
-- 
+## Neighbour Discovery Protocol
+- protocol used with IPv6
+- One of its many functions is to replace ARP used with IPv6
+	- the ARP-like function of NDP uses ICMPv6 and solicited-node multicast address to learn the MAC address of other hosts. (ARP in IPv4 uses broadcast)
+- Another function of NDP is to allow hosts to automatically discover routers on the local network.
+- It performs duplicate address detection (DAD) which checks if other devices on the local link are using the same IPv6 address. 
+
+
+### ARP Replacement Functions
+
+#### Message types used
+- Neighbour Solicitation (NS) = ICMPv6 Type 135
+- Neighbour Advertisment (NA) = ICMPv6 Type 136
+
+#### Solicited-Node Multicast Address
+- an IPv6 solicited-node multicast address is calculated from a unicast address
+- ff02:0000:0000:0000:0000:0001:ff + last 6 hex digits of unicast address
+	- example: 2001:0db8:0000:0001:0f2a:4fff:fe(a3:00b1)
+	- gives us ff02::1:ffa3:b1
+
+#### Neighbour Solicitation (NS) - ARP request equivalent
+- the goal is to ask for the MAC address "Who has this IPv6 address"
+- Source IP address - sender's address as usual (same as ARP)
+- Destination IP address - solicited-node multicast address
+- source MAC - sender's MAC address as usual (same as ARP)
+- Destination MAC - Multicast MAC based on the solicited-node multicast address
+	- IPv6mcast_ff+last 6 hex digits (real address is shown on the right)
+
+#### Neighbour Advertisement (NA) - ARP reply
+- Source IP: usual address
+- Destination IP: usual address (cause it has learned the address)
+- Source MAC: usual address
+- Destination MAC: usual address (cause it has learned the address)
+
+### Router Discovery on Local Network
+- two messages are used to this process
+- allow hosts to automatically discover routers on the local network
+
+#### Router Solicitation (RS) - ICMPv6 type 133
+- sent to multicast address FF02::2 (all routers)
+- asks all routers on the local link to identify themselves
+- Sent when an interface is enabled/host is connected to the network
+
+#### Router Advertisment (RA) - ICMPv6 type 134
+- Sent to the multicast address FF02::1 (all nodes)
+- the router announces its presence, as well as other information about the link
+- These messages are sent in response to RS messages
+- They are also sent periodically, even if the router hasn't received an RS
+
+### SLAAC Stateless Address Auto-configuration
+- Hosts use RS/RA messages to learn the IPv6 prefix of the local link (i.e. 2001:db8::/64), and then automatically generate an IPv6 address.
+- Using the ipv6 address autoconfig command, you don't need to enter the prefix. The device uses NDP to learn the prefix used on the local link
+- The device will use EUI-64 to generate the interface ID, or it will be randomly generated (depending on the device maker)
+
+### Duplicate Address Detection (DAD)
+- allows hosts to check if other devices on the local link are using the same IPv6 address
+- Any time an IPv6-enabled interface initialises (no shutdown commands), or an IPv6 address is configured on an interface (by any method: manual, SLAAC, etc.), it performs DAD.
+- DAD uses two messages: NS and NA
+- the host will send an NS to its own solicited-node multicast address (IPv6) address. If it doesn't get a reply, it knows the address is unique.
+- If it gets a reply, it means another host on the network is already using the address.
+
+| Number | Reason                                                                                                        | Commands                              |
+| ------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| 1      | Configure the IPv6 address automatically<br>without  typing in the prefix as you would for the eui-64 command | R(config-if)# ipv6 address autoconfig |
+## IPv6 Static Routing
+- works the same as IPv4 routing
+- IPv4 and IPv6 routing are two separate processes on the router, and the two routing tables are separate as well
+- IPv4 routing is enabled by default, while IPv6 is disabled by default and needs to enabled with ipv6 unicast-routing.
+- If IPv6 routing is disabled, the router will be able to send and receive IPv6 traffic, but will not route IPv6 traffic (=will not forward it between networks)
+- default gateway is ::/0
+
+### IPv6 Routing Table
+- A connected network route is automatically added for each connected network
+- A local host route is automatically added for each address configured on the router
+- Routes for link-local addresses are not added to the routing table
+
+### Types of Static routes
+- Directly attached static route
+	- only the exit interface is specified
+	- in IPv6, you can't use directly attached static routes if the interface is an Ethernet interface
+- Recursive static route:
+	- only the next hop is specified
+- Full specified static route
+	- Both the exit interface and next hop are specified
+
+| Number | Reason                                                 | Commands                                                                           |
+| ------ | ------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| 1      | Check the IPv6 routing table                           | R# show ipv6 route                                                                 |
+| 2      | Create an IPv6 static route (you can configure the AD) | R(config)# ipv6 route [dst-ip/netmask] {next-hop\| exit-interface [next-hop]} [AD] |
+### Link-Local Next-hops
+- if you want to use a link-local address as a next-hop, you have to specify both the next hop address and the exit interface.
+
 
 ### IPv6 Configuration Commands
-| Number | Reason                                                                                           | Commands                                                       |
-| ------ | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| 1      | Allow the router to perform IPv6 routing                                                         | R(config)# ipv6 unicast-routing                                |
-| 2      | Enable IPv6 on an interface                                                                      | R(config-if)#ipv6 enable                                       |
-| 3      | configure an IPv6 address on an interface. You can abbreviate the address                        | R(config-if)# ipv6 address [address/netmask]                   |
-| 4      | Make sure it isn't shutdown                                                                      | R(config-if)# no shutdown                                      |
-| 5      | display the configured IPv6 address as well as the link-local address                            | R# show ipv6 interface brief                                   |
-| 6      | Configure a static route                                                                         | R(config)# ipv6 route \[destination-ip/netmask] \[next-hop-ip] |
-| 7      | Shows the IPv6 group addresses an interface joined and check other things like anycast addresses | R#show ipv6 interface [interface]                              |
+| Number | Reason                                                                                                                                       | Commands                                                       |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| 1      | Allow the router to perform IPv6 routing                                                                                                     | R(config)# ipv6 unicast-routing                                |
+| 2      | Enable IPv6 on an interface                                                                                                                  | R(config-if)#ipv6 enable                                       |
+| 3      | configure an IPv6 address on an interface. You can abbreviate the address                                                                    | R(config-if)# ipv6 address [address/netmask]                   |
+| 4      | Make sure it isn't shutdown                                                                                                                  | R(config-if)# no shutdown                                      |
+| 5      | display the configured IPv6 address as well as the link-local address                                                                        | R# show ipv6 interface brief                                   |
+| 6      | Configure a static route                                                                                                                     | R(config)# ipv6 route \[destination-ip/netmask] \[next-hop-ip] |
+| 7      | Shows the IPv6 group addresses an interface joined and check other things like anycast addresses. Shows the solicited-node multicast address | R#show ipv6 interface [interface]                              |
 
 ### IPv6 addresses (EUI-64) command
 
@@ -226,8 +326,14 @@
 
 | Number | Reason                                                                          | Commands                                               |
 | ------ | ------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| 1      | Configure an anycast address by specifying anycast on a regular unicast address | R(config0if)# ipv6 address [ipv6-addr/netmask] anycast |
+| 1      | Configure an anycast address by specifying anycast on a regular unicast address | R(config-if)# ipv6 address [ipv6-addr/netmask] anycast |
 |        |                                                                                 |                                                        |
+### IPv6 Neighbor Table
+| Number | Reason                                                                                                                                                | Commands              |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| 1      | Shows the ipv6 neighbour table (ipv6 doesnt use arp<br>so this is basically its equivalent). The link-layer address shows the neighbour's MAC address | R# show ipv6 neighbor |
+|        |                                                                                                                                                       |                       |
+
 ## Review Section
 1. Shorten the following IP addresses
 ![[Pasted image 20260924102432.png]]
