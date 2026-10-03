@@ -8,7 +8,7 @@
 	- privacy of data within the LAN is a greater concern.
 	- CSMA/CA (carrier sense multiple access with collision avoidance) is used to facilitate half-duplex communications
 
-## 802.11 Header
+## 802.11 Frame Format 
 
 ## Wireless LAN Controller
 - the service port interface of a wireless LAN controller (WLC) is the only available interface when the WLC is booting.

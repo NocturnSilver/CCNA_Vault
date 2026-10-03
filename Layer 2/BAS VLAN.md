@@ -97,11 +97,11 @@
 
 | Number | Reason                                             | Command                                              |
 | ------ | -------------------------------------------------- | ---------------------------------------------------- |
-| 1      |                                                    |                                                      |
-| 2      | Configure the native VLAN on a router subinterface | R(config-subif)# encapsulation dot1q [vlanID] native |
-| 3      | Create a subinterface                              | R(config)# interface [interface with decimal]        |
-| 4      | Configure the VLAN number on a router subinterface | R(config-subif)# encapsulation dot1q vlan-number     |
-|        | Configure an ip address for the subinterface       | R(config-subif)# ip address [ipaddr] [netmask]       |
+| 1      | Configure the native VLAN on a router subinterface | R(config-subif)# encapsulation dot1q [vlanID] native |
+| 2      | Create a subinterface                              | R(config)# interface [interface with decimal]        |
+| 3      | Configure the VLAN number on a router subinterface | R(config-subif)# encapsulation dot1q vlan-number     |
+| 4      | Configure an ip address for the subinterface       | R(config-subif)# ip address [ipaddr] [netmask]       |
+|        |                                                    |                                                      |
 ## List of commands on a multilayer switch
 | Number | Reason                                        | Command                      |
 | ------ | --------------------------------------------- | ---------------------------- |
