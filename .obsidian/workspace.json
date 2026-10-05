@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Layer 3/SEC - Extended ACLs.md",
+                "file": "Layer 5 or 7/NTP.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SEC - Extended ACLs"
+              "title": "NTP"
             }
           }
         ],
@@ -220,16 +220,16 @@
   },
   "active": "e24ad21b98f13a89",
   "lastOpenFiles": [
+    "Layer 2/FEAT - CDP and LLDP.md",
+    "Layer 3/SEC - Extended ACLs.md",
     "Layer 3/SEC - Standard ACLs.md",
     "Layer 3/ROUT - OSPF.md",
     "Layer 3/A. Summary.md",
     "Layer 3/BAS - IPV4.md",
-    "Layer 3/SEC - Extended ACLs.md",
     "Layer 3/ROUT - RIP and EIGRP.md",
     "Wireless Fundamentals/Wireless Fundamentals.md",
     "Wireless Fundamentals/1. Wireless Fundamentals.canvas",
     "Wireless Fundamentals/Configuration/Wireless Configurations.md",
-    "Layer 2/FEAT - CDP and LLDP.md",
     "Layer 2/BAS VLAN.md",
     "Layer 2/BAS List of Standards.md",
     "Layer 2/FEAT - QoS (Layer 2).md",

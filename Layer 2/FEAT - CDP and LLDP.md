@@ -47,10 +47,10 @@
 
 ## Discovery Protocol MAC Addresses
 
-| Protocol | Mac Address    |
-| -------- | -------------- |
-| CDP      | 0100.0CCC.CCCC |
-| LLDP     | 0180:c200:000e |
+| Protocol | Mac Address    | Protocol |
+| -------- | -------------- | -------- |
+| CDP      | 0100.0CCC.CCCC | -        |
+| LLDP     | 0180:c200:000e | 802.1AB  |
 
 ## CDP Show Commands
 | Number | Reason                                                                                                                                                                                                                                                       | Command                      |
