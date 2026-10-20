@@ -54,7 +54,7 @@
 	- src port: 67, dst port 68
 	- bootp flags: 0x0000 (unicast/broadcast - some clients wont accept unicast messages until their IP address is set hence broadcast)
 	- client IP address - 0.0.0.0
-	- Option 51 - Addres lease time
+	- Option 51 - Address lease time
 	- option 6 - Domain Name Server
 	- Option 3 - Router
 - DHCP Request
@@ -71,13 +71,20 @@
 | number | reason                                                                                      | command                                                                                           |
 | ------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | 1      | Specify a range of addresses that won't be given to DHCP clients                            | R(config)# ip dhcp excluded-address \<start-addr> \<last-addr>                                    |
-| 2      | Create a DHCP pool. Enters DHCP config mode                                                 | R(config)# iop dhcp <pool_name>                                                                   |
+| 2      | Create a DHCP pool. Enters DHCP config mode                                                 | R(config)# ip dhcp <pool_name>                                                                    |
 | 3      | Specify the subnet of addresses to be assigned to the clients (except the excluded address) | R(dhcp-config)# network \<ip-address> \<netmask \| prefix length>                                 |
 | 4      | Specify the DNS server that DHCP clients should use                                         | R(dhcp-config)# dns-server \<ip-address>                                                          |
 | 5      | Specify the domain name of the network.                                                     | R(dhcp-config)#domain-name \<domain-name>                                                         |
 | 6      | Specify the default gateway the DHCP clients will use                                       | R(dhcp-config)# default-router \<ip-address>                                                      |
 | 7      | Specify the lease time                                                                      | R(dhcp-config)# lease \<days> \<hours> \<minutes><br><br>or<br><br>R(dhcp-config)# lease infinite |
 | 8      | Shows all of the DHCP clients that are currently assigned IP addresses                      | R# show ip dhcp binding                                                                           |
+
+## DCHP Client
+- A router can be a DHCP client - it can use DHCP to configure the ip address on its interface. This is a rare case. Usually network devices will be configured with a fixed ip address.
+
+| number | reason                                                                              | command                      |
+| ------ | ----------------------------------------------------------------------------------- | ---------------------------- |
+| 1      | Use the ip addres dhcp mode to tell the router to use DHCP to learn its IP address  | R(config-if)#ip address dhcp |
 
 
 ## DHCP Relay - centralised DHCP server solution
@@ -90,13 +97,13 @@
 
 ## DHCP Relay Config
 
-| number | reason                                                                                                                          | command                                       |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| 1      | Configures DHCP relay. This enables an interface to forward DHCP broadcasts across a network to the IP address of a DHCP server | ip helper-address [ip_address of DHCP server] |
-| 2      |                                                                                                                                 |                                               |
-| 3      |                                                                                                                                 |                                               |
-|        |                                                                                                                                 |                                               |
-|        |                                                                                                                                 |                                               |
+| number | reason                                                                                                                                                                                | command                                                   |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| 1      | Configures DHCP relay. This enables an interface to forward DHCP broadcasts across a network to the IP address of a DHCP server                                                       | R(conf-if)# ip helper-address [ip_address of DHCP server] |
+| 2      | Show the helper address (the address of the DHCP server). The interface where ip-helper has been activated on. Activate the helper-address command on the interface receiving clients | R# show ip interface \[interface]                         |
+| 3      |                                                                                                                                                                                       |                                                           |
+|        |                                                                                                                                                                                       |                                                           |
+|        |                                                                                                                                                                                       |                                                           |
 
 ## Windows configuration
 - go to networks and sharing centre
