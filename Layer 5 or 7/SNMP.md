@@ -84,8 +84,15 @@
 - Trap - A notification sent from the agent to the manager. The manager does not send a Response message to acknowledge that it received the Trap, so these messages are 'unreliable'
 - Inform - a notification message that is acknowledged with a Response message 
 
-## SNMP Configuration
-| Number | Reason | Command |
-| ------ | ------ | ------- |
-|        |        |         |
+## SNMPv2c Configuration
+- not part of the test but good to know
+
+| Number | Reason                                                                                                                                                                     | Command                                                   |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| 1      | \[Optional] - give contact information like email for the router                                                                                                           | R(config)# snmp-server contact \<email>                   |
+| 2      | \[Optional] - give contact information like address                                                                                                                        | R(config)# snmp-server location                           |
+| 3      | Configure the SNMP community strings (passwords) where ro - read only (no Set messages), rw - read/write(can use set messages). Default strings: ro = public, rw = private | R(config)# snmp-server community<br>\<password> \<ro\|rw> |
+| 4      | Specify the NMS, version, and community (password)                                                                                                                         | R(config)# snmp-server host \<ip-addr> version \<2c>      |
+| 5      | Configure the trap types to send to the NMS.  ex: (snmp linkdown linkup, config)                                                                                           | R(config)# snmp-server enable traps \<trap-type>          |
+
 
